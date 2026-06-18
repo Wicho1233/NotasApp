@@ -48,7 +48,7 @@ class PagoController {
                     'price_data' => [
                         'currency' => 'mxn',
                         'product_data' => [
-                            'name' => 'Suscripción Premium - Todo-List',
+                            'name' => 'Suscripción Premium',
                             'description' => 'Desbloquea la creación ilimitada de notas y espacios',
                         ],
                         'unit_amount' => 14900,
@@ -57,7 +57,6 @@ class PagoController {
                 ]],
                 'mode' => 'payment',
 
-                // 🔥 TU FRONTEND DE NETLIFY
                 'success_url' => 'https://celebrated-fenglisu-f3908d.netlify.app/pago-exitoso?session_id={CHECKOUT_SESSION_ID}&user_id=' . $id_usuario,
                 'cancel_url' => 'https://celebrated-fenglisu-f3908d.netlify.app/pago-cancelado',
             ]);

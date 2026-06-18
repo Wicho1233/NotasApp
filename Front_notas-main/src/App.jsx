@@ -11,14 +11,21 @@ function App() {
 
   useEffect(() => {
     const usuario = localStorage.getItem('usuario_sesion');
-    const params = new URLSearchParams(window.location.search);
-    
-    const tieneSessionId = params.has('session_id');
-    const esRutaPago = window.location.pathname.includes('pago-exitoso');
+    const path = window.location.pathname;
 
-    if ((tieneSessionId || esRutaPago) && usuario) {
+    // 🔥 PRIORIDAD: rutas de Stripe (NO dependen del login)
+    if (path.includes('pago-exitoso')) {
       setPage('pago-exitoso');
-    } else if (usuario) {
+      return;
+    }
+
+    if (path.includes('pago-cancelado')) {
+      setPage('principal'); // puedes cambiarlo si haces una página cancelado
+      return;
+    }
+
+    // 🔐 Flujo normal
+    if (usuario) {
       setPage('principal');
     } else {
       setPage('login');
@@ -28,6 +35,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('usuario_sesion');
     setPage('login');
+    window.history.replaceState({}, document.title, "/");
   };
 
   return (
@@ -55,7 +63,10 @@ function App() {
 
       {page === 'pago-exitoso' && (
         <PagoExitosoPage
-          goToPrincipal={() => setPage('principal')}
+          goToPrincipal={() => {
+            window.history.replaceState({}, document.title, "/");
+            setPage('principal');
+          }}
         />
       )}
     </>

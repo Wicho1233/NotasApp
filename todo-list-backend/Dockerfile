@@ -1,6 +1,5 @@
 FROM php:8.2-apache
 
-# Instalar dependencias del sistema y extensiones de PHP necesarias
 RUN apt-get update && apt-get install -y \
     git \
     unzip \

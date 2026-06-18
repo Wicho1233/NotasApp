@@ -4,8 +4,7 @@ require_once __DIR__ . '/../models/pago.model.php';
 
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-$dotenv->safeLoad(); // mejor que load() para evitar errores si no existe
-
+$dotenv->safeLoad(); 
 class StripeWebhookController {
 
     public function verificarPagoExitoso() {
