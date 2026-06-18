@@ -33,8 +33,8 @@ class RegistroController {
             return;
         }
 
-        $passwordEncriptado = password_hash($password, PASSWORD_BCRYPT);
-        $exito = $userModel->registrarUsuario($nombre, $correo, $passwordEncriptado);
+        //$passwordEncriptado = password_hash($password, PASSWORD_BCRYPT);
+        $exito = $userModel->registrarUsuario($nombre, $correo, $password);
 
         if ($exito) {
             http_response_code(201);
