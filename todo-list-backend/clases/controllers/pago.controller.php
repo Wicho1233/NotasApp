@@ -56,8 +56,8 @@ class PagoController {
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => 'http://localhost:5173/pago-exitoso?session_id={CHECKOUT_SESSION_ID}&user_id=' . $id_usuario,
-                'cancel_url' => 'http://localhost:5173/pago-cancelado',
+                'success_url' => 'https://celebrated-fenglisu-f3908d.netlify.app/pago-exitoso?session_id={CHECKOUT_SESSION_ID}&user_id=' . $id_usuario,
+                'cancel_url' => 'https://celebrated-fenglisu-f3908d.netlify.app/pago-cancelado',
             ]);
 
             echo json_encode([

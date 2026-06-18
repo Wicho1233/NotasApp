@@ -19,14 +19,14 @@ export default function PrincipalPage({ logout }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/ver-espacios?id_usuario=${usuario.id}`);
+      const response = await fetch(`https://notasapp-ctau.onrender.com/ver-espacios?id_usuario=${usuario.id}`);
       const listadoEspacios = await response.json();
 
       if (Array.isArray(listadoEspacios)) {
         const espaciosConNotas = await Promise.all(
           listadoEspacios.map(async (espacio) => {
             try {
-              const resNotas = await fetch(`http://localhost:8000/ver-paginas?espacio_trab_id=${espacio.id}`);
+              const resNotas = await fetch(`https://notasapp-ctau.onrender.com/ver-paginas?espacio_trab_id=${espacio.id}`);
               const notas = await resNotas.json();
               return {
                 ...espacio,
