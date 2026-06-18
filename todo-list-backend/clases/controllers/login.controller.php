@@ -19,7 +19,7 @@ class LoginController {
         $userModel = new UserModel();
         $usuario = $userModel->obtenerUsuarioPorCorreo($correo);
 
-        if (!$usuario || $password !== $usuario['contrasena']) {
+        if (!$usuario || !password_verify($password, $usuario['contrasena'])) {
             http_response_code(401);
             echo json_encode(["status" => "error", "message" => "correo o contraseña incorrectos."]);
             return;
