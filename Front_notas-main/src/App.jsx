@@ -13,14 +13,14 @@ function App() {
     const usuario = localStorage.getItem('usuario_sesion');
     const path = window.location.pathname;
 
-    // 🔥 PRIORIDAD: rutas de Stripe (NO dependen del login)
+    
     if (path.includes('pago-exitoso')) {
       setPage('pago-exitoso');
       return;
     }
 
     if (path.includes('pago-cancelado')) {
-      setPage('principal'); // puedes cambiarlo si haces una página cancelado
+      setPage('principal'); 
       return;
     }
 

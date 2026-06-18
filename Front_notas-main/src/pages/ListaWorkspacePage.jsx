@@ -35,7 +35,7 @@ export default function ListaWorkspacePage({
     }
 
     try {
-      // CORRECCIÓN: Se añade id_usuario en ambos casos (crear y editar)
+      
       const cuerpo = notaEditando
         ? {
             id: notaEditando,
@@ -92,7 +92,7 @@ export default function ListaWorkspacePage({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           id: notaId,
-          id_usuario: usuario.id, // Buena práctica: enviar siempre el usuario
+          id_usuario: usuario.id, 
           accion: 'eliminar'
         })
       });
@@ -174,7 +174,7 @@ export default function ListaWorkspacePage({
         </div>
       ))}
 
-      {/* Modal de edición/creación */}
+     
       {workspaceActivo && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white w-[450px] rounded-2xl p-6 shadow-2xl">

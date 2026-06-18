@@ -20,7 +20,7 @@ export default function Premium({ abierto, cerrar }) {
         body: JSON.stringify({ id_usuario: usuario.id })
       });
 
-      // Capturamos el texto primero para depurar si viene HTML en vez de JSON
+     
       const textoRespuesta = await response.text();
       
       let data;
@@ -86,9 +86,9 @@ export default function Premium({ abierto, cerrar }) {
           </p>
 
           <ul className="mt-6 text-left space-y-2 text-black font-mono">
-            <li>• Workspaces ilimitados</li>
-            <li>• Notas ilimitadas</li>
-            <li>• Poder agregar imágenes a tus notas</li>
+            <li> Workspaces ilimitados</li>
+            <li> Notas ilimitadas</li>
+            <li> Poder agregar imágenes a tus notas</li>
           </ul>
 
           <button

@@ -7,8 +7,6 @@ export default function PagoExitosoPage({ goToPrincipal }) {
 
   useEffect(() => {
     let ignore = false;
-
-    // Leemos los parámetros directamente usando JS Nativo para evitar usar hooks del Router
     const searchParams = new URLSearchParams(window.location.search);
     const sessionId = searchParams.get('session_id');
     const userId = searchParams.get('user_id');
@@ -62,7 +60,7 @@ export default function PagoExitosoPage({ goToPrincipal }) {
     };
   }, []);
 
-  // Limpia los parámetros de Stripe en la URL al regresar al Dashboard
+  
   const manejarRegreso = () => {
     window.history.replaceState({}, document.title, "/");
     goToPrincipal();

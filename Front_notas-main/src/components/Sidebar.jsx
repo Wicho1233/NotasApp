@@ -10,13 +10,9 @@ import {
 
 export default function Sidebar({ activePage, setActivePage }) {
   const handleLogout = () => {
-    // 1. Limpiar almacenamiento
-    localStorage.removeItem('usuario_sesion');
+     localStorage.removeItem('usuario_sesion');
     localStorage.removeItem('token');
     sessionStorage.clear();
-
-    // 2. Forzar recarga total de la ventana
-    // Esto es lo que garantiza que la app vuelva a su estado inicial
     window.location.href = '/'; 
   };
 
