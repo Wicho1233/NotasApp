@@ -51,7 +51,7 @@ class PagoController {
                             'name' => 'Suscripción Premium',
                             'description' => 'Desbloquea la creación ilimitada de notas y espacios',
                         ],
-                        'unit_amount' => 14900,
+                        'unit_amount' => 30000,
                     ],
                     'quantity' => 1,
                 ]],
