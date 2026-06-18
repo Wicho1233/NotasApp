@@ -1,0 +1,9 @@
+RewriteEngine On
+
+
+#Si la ruta no es un archivo existente, ni una carpeta
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Todo lo que escriban se manda a index.php?url=lo-que-escribieron
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
