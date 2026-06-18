@@ -56,6 +56,8 @@ class PagoController {
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
+
+                // 🔥 TU FRONTEND DE NETLIFY
                 'success_url' => 'https://celebrated-fenglisu-f3908d.netlify.app/pago-exitoso?session_id={CHECKOUT_SESSION_ID}&user_id=' . $id_usuario,
                 'cancel_url' => 'https://celebrated-fenglisu-f3908d.netlify.app/pago-cancelado',
             ]);

@@ -16,7 +16,7 @@ export default function RegisterPage({
     }
 
     try {
-      const response = await fetch('https://notasapp-ctau.onrender.com/register', {
+      const response = await fetch('https://notasapp-1.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

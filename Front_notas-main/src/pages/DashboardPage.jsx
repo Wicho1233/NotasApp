@@ -24,7 +24,7 @@ export default function DashboardPage({
     }
 
     try {
-      const response = await fetch('https://notasapp-ctau.onrender.com/espacios', {
+      const response = await fetch('https://notasapp-1.onrender.com/espacios', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

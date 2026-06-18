@@ -12,7 +12,7 @@ export default function Premium({ abierto, cerrar }) {
     }
 
     try {
-      const response = await fetch('https://notasapp-ctau.onrender.com/crear-sesion-pago', {
+      const response = await fetch('https://notasapp-1.onrender.com/crear-sesion-pago', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json' 

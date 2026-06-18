@@ -9,16 +9,15 @@ import {
 } from 'lucide-react';
 
 export default function Sidebar({ activePage, setActivePage }) {
-  
-  // Lógica de logout integrada directamente aquí
   const handleLogout = () => {
-    // 1. Limpiamos el almacenamiento local
+    // 1. Limpiar almacenamiento
     localStorage.removeItem('usuario_sesion');
     localStorage.removeItem('token');
-    
-    // 2. Redirigimos al usuario al login
-    // Usamos location.href para asegurar una recarga completa y limpiar el estado de la app
-    window.location.href = '/login'; 
+    sessionStorage.clear();
+
+    // 2. Forzar recarga total de la ventana
+    // Esto es lo que garantiza que la app vuelva a su estado inicial
+    window.location.href = '/'; 
   };
 
   const navItems = [
@@ -30,7 +29,6 @@ export default function Sidebar({ activePage, setActivePage }) {
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 shadow-xl flex flex-col p-3">
-      {/* Header */}
       <div className="mb-6 flex items-center gap-3">
         <div className="grid h-10 w-10 place-items-center rounded-lg bg-blue-600 text-white">
           <NotepadText size={22} />
@@ -41,7 +39,6 @@ export default function Sidebar({ activePage, setActivePage }) {
         </div>
       </div>
 
-      {/* Menú */}
       <nav className="space-y-2">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -62,10 +59,9 @@ export default function Sidebar({ activePage, setActivePage }) {
         })}
       </nav>
 
-      {/* Usuario */}
       <div className="mt-auto border border-gray-200 bg-gray-50 rounded-xl p-3">
         <button
-          onClick={handleLogout} // Llamamos a la función interna
+          onClick={handleLogout}
           className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-red-500 px-3 py-2 text-sm font-medium text-red-600 transition-all duration-200 hover:bg-red-600 hover:text-white"
         >
           <LogOut size={16} />

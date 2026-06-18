@@ -37,7 +37,7 @@ export default function ListaWorkspacePage({
         ? { id: notaEditando, titulo, contenido, link_archivo: linkArchivo, accion: 'editar' }
         : { espacio_trab_id: workspaceActivo, id_usuario: usuario.id, titulo, contenido, link_archivo: linkArchivo, accion: 'crear' };
 
-      const response = await fetch('https://notasapp-ctau.onrender.com/paginas', {
+      const response = await fetch('https://notasapp-1.onrender.com/paginas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cuerpo)
@@ -73,7 +73,7 @@ export default function ListaWorkspacePage({
 
   const eliminarNota = async (notaId) => {
     try {
-      const response = await fetch('https://notasapp-ctau.onrender.com/paginas', {
+      const response = await fetch('https://notasapp-1.onrender.com/paginas', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
