@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Search, Pencil, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function BuscarWorkspacePage({
   workspaces,
@@ -17,108 +18,93 @@ export default function BuscarWorkspacePage({
     setEditando(workspace.id);
     setNuevoNombre(workspace.nombre);
   };
-const guardarCambios = async () => {
-  try {
 
-    const response = await fetch(
-      "https://notasapp-1.onrender.com/espacios",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          id: editando,
-          nombre: nuevoNombre,
-          accion: "editar"
-        })
-      }
-    );
+  const guardarCambios = async () => {
+    if (!nuevoNombre.trim()) {
+      toast.error('Ingresa un nombre válido');
+      return;
+    }
 
-    const data = await response.json();
+    try {
+      const response = await fetch(
+        'https://notasapp-1.onrender.com/espacios',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: editando,
+            nombre: nuevoNombre,
+            accion: 'editar',
+          }),
+        }
+      );
 
-    if (data.status === "success") {
+      const data = await response.json();
 
-      const nuevosWorkspaces = workspaces.map(
-        (workspace) =>
+      if (data.status === 'success') {
+        const nuevosWorkspaces = workspaces.map((workspace) =>
           Number(workspace.id) === Number(editando)
             ? {
                 ...workspace,
-                nombre: nuevoNombre
+                nombre: nuevoNombre,
               }
             : workspace
-      );
+        );
 
-      setWorkspaces(nuevosWorkspaces);
+        setWorkspaces(nuevosWorkspaces);
 
-      setEditando(null);
-      setNuevoNombre("");
+        setEditando(null);
+        setNuevoNombre('');
 
-    } else {
-      console.log(data.message);
-    }
-
-  } catch (error) {
-    console.error(error);
-    
-  }
-};
-  
- 
-  const eliminarWorkspace = async (id) => {
-
-  const confirmar = window.confirm(
-    "¿Deseas eliminar este workspace?"
-  );
-
-  if (!confirmar) return;
-
-  try {
-
-    const response = await fetch(
-      "https://notasapp-1.onrender.com/espacios",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          id: id,
-          accion: "eliminar"
-        })
+        toast.success('Workspace actualizado');
+      } else {
+        toast.error(data.message || 'Error al actualizar');
       }
-    );
+    } catch (error) {
+      console.error(error);
+      toast.error('Error de conexión');
+    }
+  };
 
-    const data = await response.json();
-
-    if (data.status === "success") {
-
-      const nuevosWorkspaces = workspaces.filter(
-        (workspace) =>
-          Number(workspace.id) !== Number(id)
+  const eliminarWorkspace = async (id) => {
+    try {
+      const response = await fetch(
+        'https://notasapp-1.onrender.com/espacios',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: id,
+            accion: 'eliminar',
+          }),
+        }
       );
 
-      setWorkspaces(nuevosWorkspaces);
+      const data = await response.json();
 
-      
+      if (data.status === 'success') {
+        const nuevosWorkspaces = workspaces.filter(
+          (workspace) => Number(workspace.id) !== Number(id)
+        );
 
-    } else {
+        setWorkspaces(nuevosWorkspaces);
 
-      console.log(data.message);
-
+        toast.success('Workspace eliminado');
+      } else {
+        toast.error(data.message || 'Error al eliminar');
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('Error de conexión');
     }
-
-  } catch (error) {
-
-    console.error(error);
-   
-  }
-};
+  };
 
   return (
     <div className="max-w-5xl mx-auto">
-
-      
       <div className="relative mb-6">
         <Search
           size={20}
@@ -134,14 +120,12 @@ const guardarCambios = async () => {
         />
       </div>
 
-     
       {workspaces.length === 0 && (
         <p className="text-center text-gray-500 mt-10">
           No hay workspaces disponibles
         </p>
       )}
 
-     
       <div className="space-y-4">
         {resultados.map((workspace) => (
           <div
@@ -154,13 +138,11 @@ const guardarCambios = async () => {
               </h2>
 
               <p className="text-sm text-gray-500">
-                {workspace.notas.length} notas
+                {workspace.notas?.length || 0} notas
               </p>
             </div>
 
-         
             <div className="flex gap-2">
-              
               <button
                 onClick={() => editarWorkspace(workspace)}
                 className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
@@ -176,13 +158,11 @@ const guardarCambios = async () => {
                 <Trash2 size={16} />
                 Eliminar
               </button>
-
             </div>
           </div>
         ))}
       </div>
 
-      
       {editando && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white w-[400px] rounded-2xl p-6">
@@ -206,7 +186,10 @@ const guardarCambios = async () => {
               </button>
 
               <button
-                onClick={() => setEditando(null)}
+                onClick={() => {
+                  setEditando(null);
+                  setNuevoNombre('');
+                }}
                 className="flex-1 bg-gray-200 py-3 rounded-xl hover:bg-gray-300"
               >
                 Cancelar
