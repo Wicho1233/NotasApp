@@ -19,5 +19,10 @@ COPY . /var/www/html/
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 RUN a2enmod rewrite
+# ... (todo lo anterior igual)
+
+# Asegurar que Apache permita el uso de .htaccess en /var/www/html/public
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
 
 EXPOSE 80
